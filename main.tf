@@ -5,6 +5,13 @@ terraform {
       version = "~>4.0"
     }
   }
+  backend "azurerm" {
+    resource_group_name = "pooranrg"
+    storage_account     = "stgpipe123"
+    container_name      = "pipecontainer"
+    key                 = "terraform.tfstate"
+  }
+
 }
 
 provider "azurerm" {
