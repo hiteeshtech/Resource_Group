@@ -1,0 +1,30 @@
+trigger:
+- main
+
+pool:
+  name: 'Hitesh_Pool'
+
+- task: TerraformInstaller@1
+  inputs:
+    terraformVersion: 'latest'
+
+- task: TerraformTask@5
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    backendServiceArm: 'Azure subscription 1(f96f2e3b-2cc8-4e5e-8ed9-4afb664bb5a8)'
+    backendAzureRmStorageAccountName: 'punitstg'
+    backendAzureRmContainerName: 'punitcontainer'
+    backendAzureRmKey: 'terraform.tfstate'
+
+- task: TerraformTask@5
+  inputs:
+    provider: 'azurerm'
+    command: 'plan'
+    environmentServiceNameAzureRM: 'Azure subscription 1(1)(f96f2e3b-2cc8-4e5e-8ed9-4afb664bb5a8)'
+
+- task: TerraformTask@5
+  inputs:
+    provider: 'azurerm'
+    command: 'apply'
+    environmentServiceNameAzureRM: 'Azure subscription 1(1)(f96f2e3b-2cc8-4e5e-8ed9-4afb664bb5a8)'
