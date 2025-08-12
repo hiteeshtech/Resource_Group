@@ -9,6 +9,8 @@ trigger:
 pool:
   name: Hitesh_Offie_PC_Pool
 
+steps:
+
 - task: TerraformInstaller@1
   inputs:
     terraformVersion: 'latest'
@@ -22,22 +24,16 @@ pool:
     backendAzureRmContainerName: 'punitcontainer'
     backendAzureRmKey: 'terraform.tfstate'
 
-
 - task: TerraformTask@5
   inputs:
     provider: 'azurerm'
     command: 'plan'
     environmentServiceNameAzureRM: 'YAML Service Connection'
 
+
 - task: TerraformTask@5
   inputs:
     provider: 'azurerm'
     command: 'apply'
     environmentServiceNameAzureRM: 'YAML Service Connection'
-
-
-
-
-
-
 
